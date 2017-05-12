@@ -20,14 +20,13 @@ namespace Portfolio.Models
 
         public static List<Project> GetProjects()
         {
-            var client = new RestClient("https://api.twilio.com/2010-04-01");
+            var client = new RestClient("https://api.github.com");
 
-            var request = new RestRequest("Accounts/" + EnvironmentVariables.AccountSid + "/Messages.json", Method.GET);
-            // ^^^^^ this converts the response to json
-            //    /Messages is XML
-            //    /Messages.json is Json
+            var request = new RestRequest("/access_token=d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d/users/katherinemat/repos", Method.GET);
 
-            client.Authenticator = new HttpBasicAuthenticator(EnvironmentVariables.AccountSid, EnvironmentVariables.AuthToken);
+            request.AddHeader("User-Agent", "katherinemat");
+
+            client.Authenticator = new HttpBasicAuthenticator("katherinemat", "d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d");
 
             var response = new RestResponse();
 
@@ -38,9 +37,11 @@ namespace Portfolio.Models
 
             JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(response.Content);
 
-            var messageList = JsonConvert.DeserializeObject<List<Project>>(jsonResponse["messages"].ToString());
+            string jsonOutput = jsonResponse.ToString();
 
-            return messageList;
+            var projectList = JsonConvert.DeserializeObject<List<Project>>(jsonOutput);
+
+            return projectList;
         }
 
         public static Task<IRestResponse> GetResponseContentAsync(RestClient theClient, RestRequest theRequest)

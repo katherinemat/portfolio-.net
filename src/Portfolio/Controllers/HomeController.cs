@@ -21,6 +21,12 @@ namespace Portfolio.Controllers
             return View();
         }
 
+        public IActionResult Projects()
+        {
+            var allProjects = Project.GetProjects();
+            return View(allProjects);
+        }
+
         public IActionResult GetProjects()
         {
             var allProjects = Project.GetProjects();
