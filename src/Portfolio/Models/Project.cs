@@ -22,11 +22,12 @@ namespace Portfolio.Models
         {
             var client = new RestClient("https://api.github.com");
 
-            var request = new RestRequest("/access_token=d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d/users/katherinemat/repos", Method.GET);
+            var request = new RestRequest("/users/katherinemat/repos", Method.GET);
 
+            request.AddHeader("Accept", "application/vnd.github.v3+json");
             request.AddHeader("User-Agent", "katherinemat");
 
-            client.Authenticator = new HttpBasicAuthenticator("katherinemat", "d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d");
+            //client.Authenticator = new HttpBasicAuthenticator("katherinemat", "d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d");
 
             var response = new RestResponse();
 
