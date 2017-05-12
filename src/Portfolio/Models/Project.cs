@@ -11,12 +11,8 @@ namespace Portfolio.Models
 {
     public class Project
     {
-        public string sid { get; set; }
-        public string To { get; set; }
-        public string From { get; set; }
-        public string Body { get; set; }
-        public string Status { get; set; }
-        public string[] ToArray { get; set; }
+        public string Name { get; set; }
+        
 
         public static List<Project> GetProjects()
         {
@@ -26,8 +22,7 @@ namespace Portfolio.Models
 
             request.AddHeader("Accept", "application/vnd.github.v3+json");
             request.AddHeader("User-Agent", "katherinemat");
-
-            //client.Authenticator = new HttpBasicAuthenticator("katherinemat", "d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d");
+            //request.AddHeader("Authorization", "token d7a7ca8b2f1d43c2b39c771f28ae9c6dbf8ed70d");
 
             var response = new RestResponse();
 
@@ -36,10 +31,10 @@ namespace Portfolio.Models
                 response = await GetResponseContentAsync(client, request) as RestResponse;
             }).Wait();
 
-            JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(response.Content);
+            //datatype is JArray, opposed to JObject because query returns array instead of object
+            JArray projectArray = JsonConvert.DeserializeObject<JArray>(response.Content);
 
-            string jsonOutput = jsonResponse.ToString();
-
+            string jsonOutput = projectArray.ToString();
             var projectList = JsonConvert.DeserializeObject<List<Project>>(jsonOutput);
 
             return projectList;
