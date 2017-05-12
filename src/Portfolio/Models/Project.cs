@@ -12,13 +12,15 @@ namespace Portfolio.Models
     public class Project
     {
         public string Name { get; set; }
-        
+        public string Html_Url { get; set; }
+        public string Description { get; set; }
+        public string Updated_At { get; set; }
 
         public static List<Project> GetProjects()
         {
             var client = new RestClient("https://api.github.com");
 
-            var request = new RestRequest("/users/katherinemat/repos", Method.GET);
+            var request = new RestRequest("/users/katherinemat/starred", Method.GET);
 
             request.AddHeader("Accept", "application/vnd.github.v3+json");
             request.AddHeader("User-Agent", "katherinemat");
@@ -34,6 +36,7 @@ namespace Portfolio.Models
             //datatype is JArray, opposed to JObject because query returns array instead of object
             JArray projectArray = JsonConvert.DeserializeObject<JArray>(response.Content);
 
+            //converting into a string is like converting into json, which is easier to manipulate
             string jsonOutput = projectArray.ToString();
             var projectList = JsonConvert.DeserializeObject<List<Project>>(jsonOutput);
 
