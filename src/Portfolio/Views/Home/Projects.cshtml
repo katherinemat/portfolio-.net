@@ -1,19 +1,18 @@
-﻿<h1>All Github Projects</h1>
+﻿<div class="projects">
+    <h1>All Github Projects</h1>
 
-@model IEnumerable<Portfolio.Models.Project>
+    @model IEnumerable<Portfolio.Models.Project>
 
-<ol>
-    @foreach (var project in Model)
-    {
-        <li>
-            <ul>
-                <li>@Html.DisplayFor(modelItem => project.Name)</li>
-                <li>@Html.DisplayFor(modelItem => project.Description)</li>
-                <li>@Html.DisplayFor(modelItem => project.Html_Url)</li>
-                <li>@Html.DisplayFor(modelItem => project.Updated_At)</li>
-            </ul>
-        </li>
-    }
-</ol>
+    <div class="all-projects">
+        @foreach (var project in Model)
+        {
+            <div class="project">
+                <a href="@Html.DisplayFor(modelItem => project.Html_Url)"><h3>@Html.DisplayFor(modelItem => project.Name)</h3></a>
+                <p>@Html.DisplayFor(modelItem => project.Description)</p>
+                <p>last updated: @Html.DisplayFor(modelItem => project.Updated_At)</p>
+            </div>
+        }
+    </div>
 
-@Html.ActionLink("Back home", "Index")
+    @Html.ActionLink("Back home", "Index")
+</div>

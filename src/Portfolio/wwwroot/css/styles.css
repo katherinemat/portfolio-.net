@@ -26,3 +26,46 @@
   height: auto;
   opacity: 0.5;
 }
+
+.links {
+    text-align: center;
+}
+
+.link {
+    
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    color: grey;
+    padding: 0px 30px 0px 30px;
+}
+
+.about {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+.interests {
+    list-style: none;
+}
+
+.me {
+    height: 200px;
+    width: auto;
+}
+
+.projects {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.all-projects {
+    display: flex;
+}
+
+.project {
+    width: 500px;
+}
+
+a {
+    text-decoration: none;
+}
